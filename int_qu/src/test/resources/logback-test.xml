@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration debug="false">     
+	<!--  console appender -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+          <evaluator> <!-- defaults to type ch.qos.logback.classic.boolex.JaninoEventEvaluator -->       
+            <matcher>
+              <Name>returning</Name>
+              <!-- filter out statements emitted on hibernate select from the Enum Type 
+              (can't hike the logger level for this type as it is used for logging update statement values as well -->
+              <regex>Returning .* as column .*</regex>
+            </matcher>
+            
+            <expression>return returning.matches(formattedMessage);</expression>
+          </evaluator>
+          <OnMismatch>NEUTRAL</OnMismatch>
+          <OnMatch>DENY</OnMatch>
+        </filter>
+        <encoder>  
+			<pattern>%thread{15} | %.-1level| %d{HH:mm:ss.SSS} | %logger{0}:%line | %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- file rolling - each day a new file with max of 10 
+  	<appender name="rolling-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+          
+  		<file>${user.home}/logs/study_related_test.log</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      		<fileNamePattern>study_related_test.%d{yyyy-MM-dd}.log</fileNamePattern>
+      		<maxHistory>5</maxHistory>
+    	</rollingPolicy>
+    	 <encoder>
+            <pattern>%d %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+  	</appender>-->
+
+
+	<!-- can define for each package it's level -->
+    <logger name="com.deepak" level="trace" /> 
+    
+    
+	<!-- other third party loggers -->
+    <logger name="org.springframework" level="info" />   
+    <!--  logger name="org.springframework.beans" level="debug" /-->
+    
+    <!-- hibnerate loggers added so that this information appears in other projects -->
+    <logger name="org.hibernate.SQL" level="debug" />
+    <!-- make following to trace to view arguments passed to selects, inserts etc -->
+    <logger name="org.hibernate.type" level="info" />
+    <!-- make the following trace to view values of selects and comment the filter above -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="debug" />
+    
+	<!--  The level for the appender -->
+	<root level="info"> 
+   		<appender-ref ref="console" />
+        <!-- appender-ref ref="rolling-file" /-->   		
+	</root> 
+	
+</configuration> 
+

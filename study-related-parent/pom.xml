@@ -1169,7 +1169,12 @@
 			<artifactId>logback-classic</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
+		<!-- used for logback appender expressions -->
+		<dependency>
+			<groupId>org.codehaus.janino</groupId> 
+			<artifactId>janino</artifactId>
+		</dependency>
+			
 		<!-- Test related -->
 		<dependency>
 			<groupId>junit</groupId>

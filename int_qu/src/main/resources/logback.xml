@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<configuration debug="false" packagingData="false" scan="true" scanPeriod="120 seconds">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">  
+        <resetJUL>true</resetJUL>  
+    </contextListener>    
+    <!-- To enable JMX Management --> 
+    <jmxConfigurator/> 
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${user.home}/logs/study-related-%d{'yyyy-MM-dd'}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+               <!--  or whenever the file size reaches 50MB -->
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%thread] %.-5level| %d{HH:mm:ss.SSS} | %logger{40} | [%X{StepTarget:-}:%X{StepName:-}] | %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <!-- Selective logging -->
+    <logger name="com.deepak" level="info" />
+
+    <!-- Third party loggers -->
+    <logger name="org.hibernate.SQL" level="info" />
+    <logger name="org.hibernate.type" level="info" />
+        
+    <!--  root logger -->
+    <root level="INFO"> 
+        <appender-ref ref="FILE" />
+    </root> 
+    
+</configuration>
