@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Bubble sort - for ascending sorting, the smallest number 'bubbles' to the top (head of the array (index 0) (the
+ * Concept: Bubble sort - for ascending sorting, the smallest number 'bubbles' to the top (head of the array (index 0) (the
  * lighter air pockets and things bubble to the top or head of the water), for descending sorting, the largest number
  * 'bubbles' up to the head of the array. NOT that the largest number goes to head of the array.
  */
