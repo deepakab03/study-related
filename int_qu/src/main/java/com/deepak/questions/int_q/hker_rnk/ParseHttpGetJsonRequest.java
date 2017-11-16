@@ -42,15 +42,17 @@ public class ParseHttpGetJsonRequest {
 //                Integer.toString(urlParameters.getBytes().length));
 //        urlConn.setRequestProperty("Content-Language", "en-US");  
 
-        urlConn.connect();
+        urlConn.connect(); //also optional it appears
         
-      //Get Response  
+        //Get Response  
         String response = null;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));) {
             response = reader.lines().collect(Collectors.joining("\n"));
         }
+        
         //1.7 way
 //        response = readJava7Way(urlConn);
+        
         return response;
     }
 
