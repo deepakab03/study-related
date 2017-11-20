@@ -1,0 +1,9 @@
+- Got to db folder in JDK
+- To start the network service - the derby server - so that different clients can connect to the same goto bin/ subfolder and run:
+  - startNetworkServer -noSecurityManager --> without the noSecurityManager, a basic security manager is installed and an access denied exception occurs while connecting to port 1527
+
+TO run commands - from the db folder
+- Run: 
+  - ij
+  - CONNECT 'jdbc:derby:dee_testing_db;create=true'; --> This creates the dee_testing_db (folder is also created on FS) if not present else connects to it
+  - Run SQL create and insert commands as required

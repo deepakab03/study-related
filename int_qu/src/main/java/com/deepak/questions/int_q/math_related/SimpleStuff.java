@@ -13,18 +13,17 @@ public class SimpleStuff {
 	}
 
 	private List<Integer> fibonacciUpTillUsingNoVars(int maxReqd) {
-		List<Integer> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<>(maxReqd);
 		list.add(0);
 		list.add(1);
-		System.out.println(0);
-		System.out.println(1);
+		System.out.format("%d, %d",list.get(0), list.get(1));
 		for (int i = 2; list.get(i - 1) < maxReqd; i ++) {
-			list.add(list.get(i - 1) + list.get (i - 2));
-			if (list.get(i) > maxReqd) {
-				list.remove(i);
+			int num = list.get(i - 1) + list.get (i - 2);
+			if (num > maxReqd) {
 				break;
 			}
-			System.out.println(list.get(i));
+			list.add(num);
+			System.out.format(", %d", list.get(i));
 		}
 		return list;
 	}
@@ -35,6 +34,7 @@ public class SimpleStuff {
 		int a = 0, b = 1;
 		list.add(a);
 //		list.add(b);
+		System.out.println(a);
 		while (b < maxReqd) {
 			System.out.println(b);
 			list.add(b);
