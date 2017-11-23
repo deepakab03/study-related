@@ -13,7 +13,6 @@ import junitparams.Parameters;
 @RunWith(JUnitParamsRunner.class)
 public class LargePackageSmallPackageTest {
 
-
     @Parameters({"16, 2, 10, 8",
         "4, 1, 4, 4",
         "4, 1, 5, 4",
@@ -24,6 +23,7 @@ public class LargePackageSmallPackageTest {
         "17, 2, 10, 9",
         "17, 1, 12, 13",
         "17, 0, 17, 17",
+        "11, 1, 5, -1",
         "18, 5, 0, -1",
         "18, 0, 17, -1",
         "18, 1, 12, -1",
@@ -32,7 +32,8 @@ public class LargePackageSmallPackageTest {
     testScenarios(int numItems, int givenLargePkgs, int givenSmallPkgs, int expectedPkgs) {
         LargePackageSmallPackage package1 = new LargePackageSmallPackage();
         
-        int returnedPkgs = package1.minimalNumPkges(givenLargePkgs, givenSmallPkgs, numItems);
+        int returnedPkgs = package1.minimalNumPkges(numItems, givenLargePkgs, givenSmallPkgs);
+//        int returnedPkgs = package1.minimalNumPkges2Ch(numItems, givenLargePkgs, givenSmallPkgs);
         
         assertThat(returnedPkgs, is(equalTo(expectedPkgs)));
     }

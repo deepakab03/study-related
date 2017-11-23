@@ -17,7 +17,7 @@ public class LargePackageSmallPackage {
     private static int CAPACITY_LARGE_BAG = 5;
     private static int CAPACITY_SMALL_BAG = 1;
     
-    public int minimalNumPkges(int givenLargePkgs, int givenSmallPkgs, int numItems) {
+    public int minimalNumPkges(int numItems, int givenLargePkgs, int givenSmallPkgs) {
         int reqdPkgs = 0;
         int numLarge = 0;
         int numSmall = 0;
@@ -60,7 +60,7 @@ public class LargePackageSmallPackage {
         return found ? reqdPkgs : -1;
     }
     
-    public  int minimalNumPkgesChandan(int items, int availableLargePackages, int availableSmallPackages) {
+    public  int minimalNumPkges2Ch(int items, int availableLargePackages, int availableSmallPackages) {
         int units = 0;
         int biggerUnits = 0;
         int smallPkt = 0;
