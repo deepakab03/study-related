@@ -7,3 +7,12 @@ TO run commands - from the db folder
   - ij
   - CONNECT 'jdbc:derby:dee_testing_db;create=true'; --> This creates the dee_testing_db (folder is also created on FS) if not present else connects to it
   - Run SQL create and insert commands as required
+  
+To connect to this from java
+ - Include the derbyclient maven dependency, spring-jdbc
+ - Create datasource with
+   - Driver class: org.apache.derby.jdbc.ClientDriver 
+   - URL eg:: jdbc:derby://localhost:1527/dee_testing_db;create=true
+   - No need for username or pwd
+ - Inject dataSrouce into a namedParamterJdbcTemplate and use above to run JDBC operations
+ 

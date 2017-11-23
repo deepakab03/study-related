@@ -30,7 +30,7 @@ import com.deepak.questions.int_q.config.DerbyClientConfig;
 @ContextConfiguration(classes=DerbyClientConfig.class)
 //@Sql("/sql/ddl/prof_dept_q.sql")
 @Sql("/sql/dml/prof_dept_q_data.sql")
-public class DeptProfQuestSqlTest {
+public class DeptProfQuestSqlIT {
 
     @Resource private NamedParameterJdbcTemplate derbyDbJdbcTemplate;
     
