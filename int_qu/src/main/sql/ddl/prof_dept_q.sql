@@ -1,6 +1,6 @@
---IF EXISTS doesn't work
---DROP TABLE prof;
---DROP TABLE dept;
+--IF EXISTS doesn't work with apache derby but this is ignored via Spring!
+DROP TABLE prof;
+DROP TABLE dept;
 
 --college department table
 CREATE TABLE dept (

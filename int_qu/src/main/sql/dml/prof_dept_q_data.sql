@@ -1,13 +1,12 @@
-
 DELETE FROM dept;
 DELETE FROM prof;
 
-INSERT INTO dept VALUES (1, 'ELECTRONICS');
+INSERT INTO dept (id, name) VALUES (1, 'ELECTRONICS');
 INSERT INTO dept VALUES (2, 'MECHANICAL');
 INSERT INTO dept VALUES (3, 'COMPUTER_SCIENCE');
 INSERT INTO dept VALUES (4, 'INDUSTRIAL');
 
-INSERT INTO prof VALUES (1, 1, 'Raghu', 2000);
+INSERT INTO prof (id, dept_id, name, salary) VALUES (1, 1, 'Raghu', 2000);
 INSERT INTO prof VALUES (2, 1, 'Kiran', 5000);
 INSERT INTO prof VALUES (3, 1, 'Somu', 2000);
 INSERT INTO prof VALUES (4, 2, 'Chomu', 8000);

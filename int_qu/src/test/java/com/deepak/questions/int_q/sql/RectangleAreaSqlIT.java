@@ -1,4 +1,4 @@
-package com.deepak.questions.int_q.hker_rnk;
+package com.deepak.questions.int_q.sql;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
@@ -22,32 +22,31 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.deepak.questions.int_q.config.DerbyClientConfig;
 
 /**
- * Find which department has highest average salary and print the name and salary of that department
+ * Given the following data definition, for the given rectangles, 
+ * write a query that selects each distinct value of area 
+ * and the number of rectangles having that area
+ * 
+ * DOESN'T WORK IN APACHE DERBY DB
  * 
  * @author Deepak Abraham
- *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=DerbyClientConfig.class)
-@Sql(scripts= {"/sql/ddl/prof_dept_q.sql"}, config=@SqlConfig (errorMode=ErrorMode.IGNORE_FAILED_DROPS))
-@Sql("/sql/dml/prof_dept_q_data.sql")
-public class DeptProfQuestSqlIT {
+@Sql(scripts="/sql/ddl/rectangle_area_q.sql", config=@SqlConfig (errorMode=ErrorMode.IGNORE_FAILED_DROPS))
+@Sql("/sql/dml/rectangle_area_data.sql")
+public class RectangleAreaSqlIT {
 
     @Resource private NamedParameterJdbcTemplate derbyDbJdbcTemplate;
     
-    public DeptProfQuestSqlIT() {
-    }
-    
     @Test public void testQuery() {
-        String query = "select d.name, avg(p.salary) as avg_sal from prof p, dept d "
-                + "where p.dept_id = d.id "
-                + "group by d.name "
-                + "order by avg_sal desc "
-                + "FETCH FIRST 1 ROWS ONLY";
+        String query = "SELECT (width * height) as area, count(*) " + 
+                "FROM rectangles " + 
+                "GROUP BY area " +
+                "ORDER BY area asc ";
         List<Map<String, Object>> dataList = derbyDbJdbcTemplate.getJdbcOperations().queryForList(query);
         
-        assertThat(dataList, hasSize(1));
-        assertThat(dataList.get(0).get("name"), is(equalTo("INDUSTRIAL")));
-        assertThat(dataList.get(0).get("avg_sal"), is(equalTo(4000)));
+        assertThat(dataList, hasSize(8));
+        assertThat(dataList.get(3).get("area"), is(equalTo(500)));
+        assertThat(dataList.get(3).get("count"), is(equalTo(4)));
     }
 }
