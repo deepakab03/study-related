@@ -23,17 +23,22 @@ public class LargePackageSmallPackageTest {
         "17, 2, 10, 9",
         "17, 1, 12, 13",
         "17, 0, 17, 17",
+        "17, 0, 20, 17",
+        "17, 0, 16, -1",
+        "20, 4, 0, 4",
         "11, 1, 5, -1",
         "18, 5, 0, -1",
         "18, 0, 17, -1",
+        "18, 0, 0, -1",
         "18, 1, 12, -1",
-        "18, 0, 0, -1"})
-    @Test public void 
+        "22, 6, 1, -1",
+        "63, 15, 2, -1"})
+    @Test(timeout = 1000) public void 
     testScenarios(int numItems, int givenLargePkgs, int givenSmallPkgs, int expectedPkgs) {
         LargePackageSmallPackage package1 = new LargePackageSmallPackage();
         
-        int returnedPkgs = package1.minimalNumPkges(numItems, givenLargePkgs, givenSmallPkgs);
-//        int returnedPkgs = package1.minimalNumPkges2Ch(numItems, givenLargePkgs, givenSmallPkgs);
+        int returnedPkgs = package1.minimalNumPkges2(numItems, givenLargePkgs, givenSmallPkgs);
+//        int returnedPkgs = package1.minimalNumberOfPackagesCh4(numItems, givenLargePkgs, givenSmallPkgs);
         
         assertThat(returnedPkgs, is(equalTo(expectedPkgs)));
     }
