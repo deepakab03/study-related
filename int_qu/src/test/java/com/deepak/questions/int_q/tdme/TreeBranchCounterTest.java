@@ -4,8 +4,15 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.deepak.questions.int_q.util.TreeDisplayer;
+import com.deepak.questions.int_q.util.tree.BTNode;
+import com.deepak.questions.int_q.util.tree.BTree;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -33,8 +40,8 @@ public class TreeBranchCounterTest {
     }
     
     @SuppressWarnings("unused")
-    private Object[] testData() {
-        return new Object[] {
+    private Object[][] testData() {
+        return new Object[][] {
                 /**
                  * <pre>
                   *                                     (11)
@@ -55,5 +62,32 @@ public class TreeBranchCounterTest {
         };
     }
     
-    
+    public static void main(String[] args) {
+        TreeBranchCounterTest test = new TreeBranchCounterTest();
+        Object[][] data  = test.testData();
+        int[] tree = (int[]) data[0][0]; //{1,3,1,-1,3}; 
+        BTNode rootNode = null;
+        Map<Integer, BTNode> nodeToNodeObjMap = new HashMap<>();
+        for (int node = 0 ; node < tree.length; node++) {
+            BTNode nodeObj = null;
+            if ( (nodeObj = nodeToNodeObjMap.get(node)) == null) {
+                nodeObj= new BTNode(node);
+                nodeToNodeObjMap.put(node, nodeObj);
+            } 
+            
+            int parentNode = tree[node];
+            if (parentNode == -1) {
+                rootNode = nodeObj;
+                nodeToNodeObjMap.put(-1, nodeObj);
+                continue;
+            }
+            BTNode parentNodeObj = null;
+            if ((parentNodeObj = nodeToNodeObjMap.get(parentNode)) == null) {
+                parentNodeObj = new BTNode(parentNode);
+                nodeToNodeObjMap.put(parentNode, parentNodeObj);
+            }
+            parentNodeObj.setChildNode(nodeObj);
+        }
+        new TreeDisplayer().display(new BTree(rootNode));
+    }
 }
