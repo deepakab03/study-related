@@ -26,17 +26,17 @@ public class BubbleSort implements Sorting {
         int len = input.length;
         int iterCounter = 0;
         while (len > 0) {
-            int newN = 0;
+            int newLen = 0;
             for (int j = 0; j < len - 1; j++) {
                 if (writeCounter) logger.trace("Comparision Counter {}", ++opCounter);
                 if (input[j] > input[j + 1]) {
                     Sorting.swap(input, j, j + 1);
-                    newN = j + 1;
+                    newLen = j + 1;
                     if (writeCounter) logger.trace("Swap Counter {}", ++swapCounter);
                 }
                 if (logArrayPerIteratotion) Sorting.logArray(input, logger);
             }
-            len = newN;
+            len = newLen;
             if (logArrayPerIteratotion) logger.trace("Iteration {} completed", ++iterCounter);
         }
         
